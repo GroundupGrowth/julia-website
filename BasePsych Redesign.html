@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>BasePsych — Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="type-fonts.css"/>
+<style>
+  html, body { height: 100%; margin: 0; background: #f0eee9; font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+  .artboard-frame { background: #fff; }
+  .artboard-frame.mobile-frame { box-shadow: inset 0 0 0 6px #1a1612; border-radius: 32px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="icons.jsx"></script>
+<script type="text/babel" src="layout.jsx"></script>
+<script type="text/babel" src="page-home.jsx"></script>
+<script type="text/babel" src="page-others.jsx"></script>
+<script type="text/babel" src="page-article.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+<script type="text/babel">
+
+// Mini wrapper for use inside artboards: standalone scroll container + page render
+function MiniSite({ initialPage = "home", hero = "default", mobile = false, articleId = 1 }) {
+  const [page, setPage] = React.useState(initialPage);
+  const [aId, setAId] = React.useState(articleId);
+  const [tweaks] = React.useState({ theme: "warm", dark: false, fonts: "editorial", hero, density: "regular", photos: "on" });
+  const scrollRef = React.useRef(null);
+  React.useEffect(() => { window.__bpNav = setPage; }, []);
+  React.useEffect(() => {
+    const els = scrollRef.current ? scrollRef.current.querySelectorAll(".reveal") : [];
+    els.forEach(el => el.classList.add("in"));
+  }, [page]);
+  const onNav = (p, id) => { if (p === "article" && id != null) setAId(id); setPage(p); };
+  let pageEl;
+  switch (page) {
+    case "services":   pageEl = <ServicesPage onNav={onNav}/>; break;
+    case "therapists": pageEl = <TherapistsPage onNav={onNav}/>; break;
+    case "articles":   pageEl = <ArticlesPage onNav={onNav}/>; break;
+    case "article":    pageEl = <ArticlePage articleId={aId} onNav={onNav} readingWidth="comfortable"/>; break;
+    case "contact":    pageEl = <ContactPage onNav={onNav}/>; break;
+    case "faqs":       pageEl = <FaqsPage onNav={onNav}/>; break;
+    default:           pageEl = <HomePage heroVariant={tweaks.hero} onNav={onNav}/>;
+  }
+  return (
+    <div ref={scrollRef} className={"bp-scroll" + (mobile ? " mobile-frame" : "")}
+         data-theme={tweaks.theme} data-fonts={tweaks.fonts}
+         data-density={tweaks.density} data-photos={tweaks.photos}
+         style={{ height: "100%", overflowY: "auto", overflowX: "hidden", background: "var(--bg)", color: "var(--ink)" }}>
+      <Nav active={page} onNav={onNav}/>
+      <main>{pageEl}</main>
+      <Footer onNav={onNav}/>
+    </div>
+  );
+}
+
+function CanvasApp() {
+  return (
+    <DesignCanvas>
+      <DCSection id="desktop" title="BasePsych — Desktop" subtitle="Full prototype · click nav to switch pages · all 6 pages clickable">
+        <DCArtboard id="d-home" label="Home" width={1440} height={900}>
+          <MiniSite initialPage="home"/>
+        </DCArtboard>
+        <DCArtboard id="d-services" label="Services" width={1440} height={900}>
+          <MiniSite initialPage="services"/>
+        </DCArtboard>
+        <DCArtboard id="d-therapists" label="Therapists" width={1440} height={900}>
+          <MiniSite initialPage="therapists"/>
+        </DCArtboard>
+        <DCArtboard id="d-articles" label="Articles" width={1440} height={900}>
+          <MiniSite initialPage="articles"/>
+        </DCArtboard>
+        <DCArtboard id="d-contact" label="Contact" width={1440} height={900}>
+          <MiniSite initialPage="contact"/>
+        </DCArtboard>
+        <DCArtboard id="d-faqs" label="FAQs" width={1440} height={900}>
+          <MiniSite initialPage="faqs"/>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="article-reading" title="Article reading view" subtitle="Editorial layout · 6 articles · pull quotes + author card">
+        <DCArtboard id="a-1" label="01 · Secure base" width={1440} height={1100}>
+          <MiniSite initialPage="article" articleId={1}/>
+        </DCArtboard>
+        <DCArtboard id="a-2" label="02 · The body first" width={1440} height={1100}>
+          <MiniSite initialPage="article" articleId={2}/>
+        </DCArtboard>
+        <DCArtboard id="a-3" label="03 · Not the dishes" width={1440} height={1100}>
+          <MiniSite initialPage="article" articleId={3}/>
+        </DCArtboard>
+        <DCArtboard id="a-4" label="04 · First session" width={1440} height={1100}>
+          <MiniSite initialPage="article" articleId={4}/>
+        </DCArtboard>
+        <DCArtboard id="a-5" label="05 · Overthinking" width={1440} height={1100}>
+          <MiniSite initialPage="article" articleId={5}/>
+        </DCArtboard>
+        <DCArtboard id="a-6" label="06 · Parentified" width={1440} height={1100}>
+          <MiniSite initialPage="article" articleId={6}/>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="hero-variants" title="Hero variants — Home" subtitle="Three takes on the landing moment, swappable via Tweaks in the live prototype">
+        <DCArtboard id="h-default" label="Center · typographic" width={1440} height={900}>
+          <MiniSite initialPage="home" hero="default"/>
+        </DCArtboard>
+        <DCArtboard id="h-editorial" label="Editorial · split" width={1440} height={900}>
+          <MiniSite initialPage="home" hero="editorial"/>
+        </DCArtboard>
+        <DCArtboard id="h-fullbleed" label="Full-bleed photo" width={1440} height={900}>
+          <MiniSite initialPage="home" hero="fullbleed"/>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="mobile" title="BasePsych — Mobile" subtitle="iPhone width · all pages">
+        <DCArtboard id="m-home" label="Home" width={390} height={844}>
+          <MiniSite initialPage="home" mobile/>
+        </DCArtboard>
+        <DCArtboard id="m-services" label="Services" width={390} height={844}>
+          <MiniSite initialPage="services" mobile/>
+        </DCArtboard>
+        <DCArtboard id="m-therapists" label="Therapists" width={390} height={844}>
+          <MiniSite initialPage="therapists" mobile/>
+        </DCArtboard>
+        <DCArtboard id="m-articles" label="Articles" width={390} height={844}>
+          <MiniSite initialPage="articles" mobile/>
+        </DCArtboard>
+        <DCArtboard id="m-contact" label="Contact" width={390} height={844}>
+          <MiniSite initialPage="contact" mobile/>
+        </DCArtboard>
+        <DCArtboard id="m-faqs" label="FAQs" width={390} height={844}>
+          <MiniSite initialPage="faqs" mobile/>
+        </DCArtboard>
+      </DCSection>
+
+      <DCPostIt top={140} left={40} rotate={-3} width={220}>
+        Open the live prototype (button bottom-left of any artboard) for full interactivity, Tweaks panel, and to click between pages.
+      </DCPostIt>
+    </DesignCanvas>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<CanvasApp/>);
+</script>
+
+<div style="position:fixed;left:16px;bottom:16px;z-index:1000;display:flex;gap:8px;font-family:-apple-system,system-ui,sans-serif;">
+  <a href="prototype.html" style="background:#2C3E2D;color:#FBF7EE;padding:12px 18px;border-radius:999px;font-size:13px;font-weight:500;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.15);display:inline-flex;align-items:center;gap:8px;">
+    Open live prototype →
+  </a>
+</div>
+</body>
+</html>
