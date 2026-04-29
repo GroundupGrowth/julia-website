@@ -1,0 +1,69 @@
+import Link from "next/link";
+import { Ico } from "@/components/icons";
+import { NAV_LINKS, WHATSAPP_URL } from "@/lib/data";
+
+function FooterLogo() {
+  return (
+    <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+      <svg width={32} height={32} viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1" opacity="0.35"/>
+        <circle cx="16" cy="16" r="10" stroke="currentColor" strokeWidth="1" opacity="0.6"/>
+        <circle cx="16" cy="16" r="4" fill="currentColor"/>
+      </svg>
+      <span className="serif" style={{ fontSize: 22, letterSpacing: "-0.01em", fontWeight: 500 }}>
+        BasePsych
+      </span>
+    </Link>
+  );
+}
+
+export default function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container">
+        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: 48, marginBottom: 64 }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20, color: "var(--clay)" }}>
+              <FooterLogo />
+            </div>
+            <p className="body" style={{ maxWidth: 360 }}>
+              Singapore&apos;s attachment-informed psychological services.
+              A safe foundation that gives space to explore, learn, and flourish.
+            </p>
+            <div style={{ marginTop: 32, display: "flex", gap: 12 }}>
+              <a className="btn btn-clay btn-sm" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+                <Ico.WhatsApp size={14}/> Message us
+              </a>
+            </div>
+          </div>
+          <div>
+            <div className="eyebrow" style={{ color: "var(--clay)", marginBottom: 20 }}>Visit</div>
+            <p className="body">63b Temple St<br/>Singapore 058608</p>
+            <p className="body" style={{ marginTop: 12 }}>Mon–Sat<br/>9am – 9pm</p>
+          </div>
+          <div>
+            <div className="eyebrow" style={{ color: "var(--clay)", marginBottom: 20 }}>Pages</div>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}><Link href={l.href}>{l.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div className="eyebrow" style={{ color: "var(--clay)", marginBottom: 20 }}>Crisis support</div>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }} className="body">
+              <li><strong style={{ color: "var(--bg-soft)" }}>999</strong> — Emergency</li>
+              <li><strong style={{ color: "var(--bg-soft)" }}>6389 2222</strong> — IMH</li>
+              <li><strong style={{ color: "var(--bg-soft)" }}>1800 221 444</strong> — SOS</li>
+            </ul>
+          </div>
+        </div>
+        <div className="rule"></div>
+        <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 24, fontSize: 13, color: "rgba(245,240,225,0.5)" }}>
+          <span>© 2026 BasePsych. All rights reserved.</span>
+          <span>Privacy · Terms · HIPAA-compliant</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
