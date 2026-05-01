@@ -156,7 +156,7 @@ export function HomeTherapists() {
   return (
     <section className="section" style={{ background: "var(--forest-deep)", color: "var(--bg-soft)" }}>
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(320px, 460px) 1fr", gap: 80, alignItems: "center" }} className="grid-2">
+        <div className="split-bio with-gap">
           <Reveal style={{ position: "relative" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -244,7 +244,7 @@ export function HomeBookCTA() {
   return (
     <section style={{ position: "relative", padding: "calc(120px * var(--space)) 0", overflow: "hidden" }}>
       <div className="container">
-        <div style={{ position: "relative", borderRadius: 12, overflow: "hidden", padding: "80px 64px", background: "var(--forest)", color: "var(--bg-card)" }}>
+        <div className="cta-box">
           <div style={{ position: "absolute", inset: 0, opacity: 0.18, color: "var(--clay)" }}>
             <RingsMotif size={420}/>
           </div>

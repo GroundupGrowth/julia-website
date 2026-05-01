@@ -80,7 +80,7 @@ export default function BookingFlow() {
       {step === 1 && (
         <>
           <h2 className="h-2" style={{ marginBottom: 36 }}>Who is therapy for?</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+          <div className="choice-2col">
             {BOOKING_WHOS.map((w) => (
               <button key={w.id} onClick={() => { update("who", w.id); setStep(2); }} className="card" style={{ padding: 28, textAlign: "left", cursor: "pointer" }}>
                 <div className="serif" style={{ fontSize: 22 }}>{w.label}</div>
@@ -118,7 +118,7 @@ export default function BookingFlow() {
       {step === 3 && (
         <>
           <h2 className="h-2" style={{ marginBottom: 36 }}>When works for you?</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <div className="choice-2col" style={{ gap: 12 }}>
             {BOOKING_TIMES.map((t) => (
               <button
                 key={t}
@@ -142,7 +142,7 @@ export default function BookingFlow() {
               <label className="fld" htmlFor="bf-name">Your name</label>
               <input id="bf-name" className="txt" value={form.name} onChange={(e) => update("name", e.target.value)} required/>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <div className="form-row-2">
               <div>
                 <label className="fld" htmlFor="bf-email">Email</label>
                 <input id="bf-email" className="txt" type="email" value={form.email} onChange={(e) => update("email", e.target.value)} required/>

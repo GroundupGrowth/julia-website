@@ -31,13 +31,13 @@ export default function ArticlesPage() {
           </div>
 
           <Reveal as="article" style={{ marginBottom: 64 }}>
-            <Link href={`/articles/${featured.id}`} className="card" style={{ padding: 0, overflow: "hidden", display: "grid", gridTemplateColumns: "1.2fr 1fr", color: "inherit" }}>
+            <Link href={`/articles/${featured.id}`} className="card split-feature" style={{ padding: 0, overflow: "hidden", color: "inherit" }}>
               <div className="imgph" style={{ minHeight: 420 }}>
                 <span className="imgph-tag">Featured · {featured.cat}</span>
               </div>
-              <div style={{ padding: 56 }}>
+              <div className="featured-card-body">
                 <span className="tag tag-forest" style={{ marginBottom: 20 }}>Featured · {featured.cat}</span>
-                <h2 className="h-1" style={{ fontSize: 44, margin: "20px 0 20px" }}>{featured.title}</h2>
+                <h2 className="h-1" style={{ fontSize: "clamp(28px, 4.4vw, 44px)", margin: "20px 0 20px" }}>{featured.title}</h2>
                 <p className="body" style={{ marginBottom: 24 }}>{featured.excerpt}</p>
                 <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 28 }}>
                   <div style={{ width: 36, height: 36, borderRadius: "50%", overflow: "hidden", background: "var(--sage)" }}>

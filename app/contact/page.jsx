@@ -12,8 +12,8 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <section className="section">
-      <div className="container" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 80, alignItems: "start" }}>
-        <div style={{ position: "sticky", top: 100 }}>
+      <div className="container contact-grid">
+        <div className="contact-aside" style={{ position: "sticky", top: 100 }}>
           <div className="eyebrow" style={{ marginBottom: 20 }}>Get in touch</div>
           <h1 className="h-1" style={{ marginBottom: 28 }}>
             Tell us a little. <em>We&apos;ll take it from there.</em>

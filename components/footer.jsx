@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: 48, marginBottom: 64 }}>
+        <div className="footer-grid">
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20, color: "var(--clay)" }}>
               <FooterLogo />
@@ -59,7 +59,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="rule"></div>
-        <div style={{ display: "flex", justifyContent: "space-between", paddingTop: 24, fontSize: 13, color: "rgba(245,240,225,0.5)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12, paddingTop: 24, fontSize: 13, color: "rgba(245,240,225,0.5)" }}>
           <span>© 2026 BasePsych. All rights reserved.</span>
           <span>Privacy · Terms · HIPAA-compliant</span>
         </div>

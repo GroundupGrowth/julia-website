@@ -213,6 +213,93 @@ img { max-width: 100%; display: block; }
 
 .rule { height: 1px; background: var(--line); width: 100%; }
 
+/* ──────────────────────────────────────────────
+   Responsive layout helpers (mobile-aware)
+   ────────────────────────────────────────────── */
+.split-bio {
+  display: grid;
+  grid-template-columns: minmax(320px, 460px) 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.split-bio.with-gap { gap: 80px; align-items: center; }
+.split-feature {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.articles-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.choice-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.featured-card-body { padding: 56px; }
+.service-card { padding: 40px; }
+.profile-card-body { padding: 48px; }
+.profile-photo { min-height: 480px; }
+.cta-box {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 80px 64px;
+  background: var(--forest);
+  color: var(--bg-card);
+}
+
+@media (max-width: 1100px) {
+  .articles-list { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .split-bio,
+  .split-bio.with-gap,
+  .split-feature,
+  .contact-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .split-bio.with-gap { gap: 32px; }
+  .contact-grid { gap: 40px; }
+  .contact-aside { position: static !important; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+  .featured-card-body { padding: 28px; }
+  .service-card { padding: 28px; }
+  .profile-card-body { padding: 28px; }
+  .profile-photo { min-height: 280px; }
+  .cta-box { padding: 48px 24px; border-radius: 8px; }
+}
+@media (max-width: 540px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .articles-list { grid-template-columns: 1fr; }
+  .form-row-2,
+  .choice-2col { grid-template-columns: 1fr; }
+}
+
 .nav {
   position: sticky;
   top: 0;
@@ -276,22 +363,69 @@ img { max-width: 100%; display: block; }
   justify-content: center;
 }
 
+.nav-mobile-panel {
+  display: none;
+  position: absolute;
+  inset: 100% 0 auto 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 24px 24px 32px;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+  animation: nav-mobile-fade 0.18s ease-out;
+}
+.nav-mobile-list {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-mobile-list a {
+  display: block;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.nav-mobile-list a.active {
+  color: var(--forest);
+  font-style: italic;
+}
+.nav-mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.nav-mobile-actions .btn { width: 100%; }
+@keyframes nav-mobile-fade {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
 @media (max-width: 860px) {
-  .nav-links { display: none; }
+  .nav-links,
+  .nav-cta-desktop { display: none; }
   .nav-mobile-toggle { display: flex; }
+  .nav.menu-open .nav-mobile-panel { display: block; }
   .container, .container-narrow { padding: 0 24px; }
   .nav-inner { padding: 14px 20px; }
   .section { padding: calc(72px * var(--space)) 0; }
-  .h-display { font-size: 44px; }
-  .h-1 { font-size: 34px; }
-  .h-2 { font-size: 26px; }
+  .h-display { font-size: clamp(36px, 8vw, 48px); }
+  .h-1 { font-size: clamp(30px, 7vw, 40px); }
+  .h-2 { font-size: clamp(24px, 6vw, 32px); }
   .grid-2 { grid-template-columns: 1fr; gap: 32px; }
   .grid-3 { grid-template-columns: 1fr; gap: 20px; }
   .grid-4 { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .quote { font-size: 22px; }
+  .fab-whatsapp { bottom: 16px; right: 16px; width: 50px; height: 50px; }
 }
 
 .link-arrow {

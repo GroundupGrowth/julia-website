@@ -33,17 +33,18 @@ export default function TherapistsPage() {
             </p>
           </div>
 
-          <div className="card" style={{ padding: 0, overflow: "hidden", display: "grid", gridTemplateColumns: "minmax(320px, 460px) 1fr", gap: 0 }}>
+          <div className="card split-bio" style={{ padding: 0, overflow: "hidden" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={t.photo}
               alt={t.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: 480 }}
+              className="profile-photo"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
             />
-            <div style={{ padding: 48 }}>
+            <div className="profile-card-body">
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: 16, gap: 16, flexWrap: "wrap" }}>
                 <div>
-                  <h3 className="h-1" style={{ fontSize: 48, marginBottom: 6 }}>{t.name}</h3>
+                  <h3 className="h-1" style={{ fontSize: "clamp(32px, 5vw, 48px)", marginBottom: 6 }}>{t.name}</h3>
                   <div style={{ fontSize: 15, color: "var(--ink-mute)" }}>{t.title}</div>
                 </div>
                 <span className="tag tag-forest" style={{ alignSelf: "start" }}>
@@ -54,7 +55,7 @@ export default function TherapistsPage() {
               <p className="serif" style={{ fontSize: 24, fontStyle: "italic", color: "var(--ink)", marginBottom: 28, lineHeight: 1.4 }}>
                 &ldquo;{t.blurb}&rdquo;
               </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28, marginBottom: 32 }}>
+              <div className="form-row-2" style={{ gap: 28, marginBottom: 32 }}>
                 <div>
                   <div className="eyebrow" style={{ marginBottom: 10 }}>Focus areas</div>
                   <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>

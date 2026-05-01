@@ -25,11 +25,11 @@ export default function ServicesPage() {
               to who you are, the season you&apos;re in, and the change you&apos;re ready for.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div className="services-grid">
             {SERVICES.map((s, i) => {
               const I = Ico[s.icon];
               return (
-                <Reveal key={s.id} className="card" style={{ padding: 40 }} delay={i * 0.04}>
+                <Reveal key={s.id} className="card service-card" delay={i * 0.04}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: 28 }}>
                     <div className="deco-circle" style={{ width: 64, height: 64 }}><I size={26} stroke={1.4}/></div>
                     <div className="serif" style={{ fontSize: 22, fontStyle: "italic", color: "var(--clay-deep)" }}>0{i + 1}</div>

@@ -31,7 +31,7 @@ export default function ArticlesFilter({ articles }) {
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 32 }}>
+      <div className="articles-list">
         {list.slice(1).map((a, i) => (
           <Link
             key={a.id}
