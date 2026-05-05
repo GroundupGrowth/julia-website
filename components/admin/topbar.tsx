@@ -20,12 +20,12 @@ export function Topbar({ email }: TopbarProps) {
             View site
           </Link>
         </Button>
-        <form action="/api/admin/auth/signout" method="post">
-          <Button variant="ghost" size="sm" type="submit">
+        <Button variant="ghost" size="sm" asChild>
+          <a href="/handler/sign-out">
             <LogOut className="h-4 w-4" />
             Sign out
-          </Button>
-        </form>
+          </a>
+        </Button>
       </div>
     </header>
   );
