@@ -204,6 +204,21 @@ img { max-width: 100%; display: block; }
   backdrop-filter: blur(4px);
 }
 
+/* When a real photo is dropped inside .imgph, hide the directional caption
+   and let the photo cover the gradient. The gradient remains as a quiet
+   fallback while the image loads (or if its URL ever 404s). */
+.imgph > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.imgph:has(> img) > .imgph-tag,
+.imgph:has(> img)::before,
+.imgph:has(> img)::after { display: none; }
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);

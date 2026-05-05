@@ -2,8 +2,9 @@ import Link from "next/link";
 import { Ico } from "@/components/icons";
 import { ARTICLES, THERAPISTS } from "@/lib/data";
 import { ARTICLE_BODIES } from "@/lib/articles";
+import { ARTICLE_INLINE } from "@/lib/images";
 
-function ArticleBlock({ block }) {
+function ArticleBlock({ block, imgSrc }) {
   if (block.h) return <h2 className="article-h">{block.h}</h2>;
   if (block.q) return <blockquote className="article-quote">{block.q}</blockquote>;
   if (block.l) {
@@ -17,6 +18,10 @@ function ArticleBlock({ block }) {
     return (
       <figure className="article-figure">
         <div className="article-figure-img imgph">
+          {imgSrc && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={imgSrc} alt={block.img}/>
+          )}
           <span className="imgph-tag">{block.img}</span>
         </div>
       </figure>
@@ -66,7 +71,13 @@ export default function ArticleView({ articleId, readingWidth = "comfortable" })
       </header>
 
       <div className="article-body">
-        {body.blocks.map((b, i) => <ArticleBlock key={i} block={b}/>)}
+        {(() => {
+          let imgIdx = 0;
+          return body.blocks.map((b, i) => {
+            const src = b.img ? ARTICLE_INLINE[`${article.id}:${imgIdx++}`] : undefined;
+            return <ArticleBlock key={i} block={b} imgSrc={src}/>;
+          });
+        })()}
       </div>
 
       <div className="article-end-mark">

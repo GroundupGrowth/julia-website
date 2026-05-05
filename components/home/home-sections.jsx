@@ -5,6 +5,7 @@ import { Ico, ThreadMotif, RingsMotif } from "@/components/icons";
 import Reveal from "@/components/reveal";
 import MoodEntry from "@/components/mood-entry";
 import { SERVICES, THERAPISTS, ARTICLES, WHATSAPP_URL } from "@/lib/data";
+import { HERO_IMG, MOOD_IMG, ARTICLE_COVERS } from "@/lib/images";
 
 export function HomeHero() {
   return (
@@ -28,6 +29,8 @@ export function HomeHero() {
         </Reveal>
         <div style={{ marginTop: 80, position: "relative" }}>
           <div className="imgph" style={{ height: 420, borderRadius: 6 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={HERO_IMG} alt="Soft natural light through a window in a quiet room"/>
             <span className="imgph-tag">Wide · therapy room interior, natural light</span>
           </div>
           <div style={{ position: "absolute", top: -24, right: -24, color: "var(--sage)", opacity: 0.7 }}>
@@ -65,6 +68,8 @@ export function HomeMood() {
           <MoodEntry />
           <div style={{ position: "relative" }}>
             <div className="imgph" style={{ aspectRatio: "4/5", borderRadius: 6 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={MOOD_IMG} alt="A pair of hands cradling a warm cup beside a plant"/>
               <span className="imgph-tag">Hands · cradling warm cup, blurred plant</span>
             </div>
             <div style={{ position: "absolute", left: -28, top: -28, color: "var(--clay-deep)", opacity: 0.6 }}>
@@ -223,6 +228,8 @@ export function HomeArticles() {
             >
               <Link href={`/articles/${a.id}`} style={{ display: "block", color: "inherit" }}>
                 <div className="imgph" style={{ aspectRatio: "16/10", borderRadius: 6, marginBottom: 24 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={ARTICLE_COVERS[a.id]} alt={a.title}/>
                   <span className="imgph-tag">Editorial · {a.cat}</span>
                 </div>
                 <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 16 }}>

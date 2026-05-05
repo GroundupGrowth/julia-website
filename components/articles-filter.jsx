@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ARTICLE_COVERS } from "@/lib/images";
 
 const CATS = ["All", "Attachment", "Anxiety", "Couples", "Therapy 101"];
 
@@ -40,6 +41,8 @@ export default function ArticlesFilter({ articles }) {
             style={{ cursor: "pointer", transitionDelay: i * 0.05 + "s", display: "block" }}
           >
             <div className="imgph" style={{ aspectRatio: "4/3", borderRadius: 6, marginBottom: 20 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={ARTICLE_COVERS[a.id]} alt={a.title}/>
               <span className="imgph-tag">{a.cat}</span>
             </div>
             <span className="tag tag-forest" style={{ marginBottom: 14 }}>{a.cat}</span>

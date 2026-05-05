@@ -4,6 +4,7 @@ import Reveal from "@/components/reveal";
 import ArticlesFilter from "@/components/articles-filter";
 import { HomeBookCTA } from "@/components/home/home-sections";
 import { ARTICLES, THERAPISTS } from "@/lib/data";
+import { ARTICLE_COVERS } from "@/lib/images";
 
 export const metadata = {
   title: "Articles & essays — BasePsych",
@@ -33,6 +34,8 @@ export default function ArticlesPage() {
           <Reveal as="article" style={{ marginBottom: 64 }}>
             <Link href={`/articles/${featured.id}`} className="card split-feature" style={{ padding: 0, overflow: "hidden", color: "inherit" }}>
               <div className="imgph" style={{ minHeight: 420 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={ARTICLE_COVERS[featured.id]} alt={featured.title}/>
                 <span className="imgph-tag">Featured · {featured.cat}</span>
               </div>
               <div className="featured-card-body">
