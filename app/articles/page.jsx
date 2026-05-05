@@ -9,7 +9,7 @@ import { ARTICLE_COVERS } from "@/lib/images";
 export const metadata = {
   title: "Articles & essays — BasePsych",
   description:
-    "Slow, careful writing on therapy, attachment, and being human — by Julia Khaw, Clinical Psychologist.",
+    "Slow, careful writing on therapy, attachment, and being human — by Julia Khaw, Registered Clinical Psychologist.",
 };
 
 export default function ArticlesPage() {

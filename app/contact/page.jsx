@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { Ico } from "@/components/icons";
 import BookingFlow from "@/components/contact/booking-flow";
-import { WHATSAPP_URL, WHATSAPP_DISPLAY } from "@/lib/data";
+import {
+  WHATSAPP_URL,
+  WHATSAPP_DISPLAY,
+  EMAIL,
+  INSTAGRAM_URL,
+  INSTAGRAM_HANDLE,
+  ADDRESS,
+  HOURS_SUMMARY,
+  REFERRAL_DISCOUNT,
+} from "@/lib/data";
 
 export const metadata = {
   title: "Contact — BasePsych",
@@ -31,12 +40,37 @@ export default function ContactPage() {
               </a>
             </div>
             <div>
-              <div className="eyebrow" style={{ marginBottom: 6 }}>Visit</div>
-              <div className="body" style={{ fontSize: 15 }}>63b Temple St, Singapore 058608<br/>Mon–Sat · 9am–9pm</div>
+              <div className="eyebrow" style={{ marginBottom: 6 }}>Email</div>
+              <a className="link-arrow" href={`mailto:${EMAIL}`}>
+                {EMAIL} <Ico.Arrow size={13}/>
+              </a>
             </div>
             <div>
-              <div className="eyebrow" style={{ marginBottom: 6 }}>Email</div>
-              <div className="body" style={{ fontSize: 15 }}>hello@basepsych.com</div>
+              <div className="eyebrow" style={{ marginBottom: 6 }}>Visit</div>
+              <div className="body" style={{ fontSize: 15 }}>{ADDRESS.full}</div>
+            </div>
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 6 }}>Hours</div>
+              <ul style={{ listStyle: "none", display: "grid", gap: 4 }} className="body">
+                {HOURS_SUMMARY.map((h) => (
+                  <li key={h.label} style={{ fontSize: 15 }}>{h.label} · {h.time}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 6 }}>Instagram</div>
+              <a className="link-arrow" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+                {INSTAGRAM_HANDLE} <Ico.Arrow size={13}/>
+              </a>
+            </div>
+            <div style={{
+              padding: 18,
+              background: "var(--bg-card)",
+              border: "1px solid var(--line)",
+              borderRadius: "var(--r-md)",
+            }}>
+              <div className="eyebrow" style={{ marginBottom: 6, color: "var(--clay-deep)" }}>For referrals & returning clients</div>
+              <div className="body" style={{ fontSize: 14 }}>{REFERRAL_DISCOUNT}</div>
             </div>
             <div>
               <Link className="link-arrow" href="/faqs" style={{ color: "var(--ink-mute)", borderColor: "var(--ink-mute)" }}>

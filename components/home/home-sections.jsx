@@ -51,9 +51,10 @@ export function HomeStory() {
           &ldquo;The name BasePsych is inspired by attachment theory — our primal need for a <em>secure base</em>:
           a safe foundation that gives us a space to explore, learn, and flourish.&rdquo;
         </p>
-        <p className="body" style={{ maxWidth: 580, margin: "0 auto" }}>
-          At the heart of our practice is a commitment to serve our community with the highest
-          professional and ethical standards. We wish you a smooth start in this journey.
+        <p className="body" style={{ maxWidth: 620, margin: "0 auto" }}>
+          A small, careful clinical practice in Singapore — led by Julia Khaw, Registered Clinical
+          Psychologist. Suitable for individuals navigating adverse childhood experiences,
+          trauma, depression, anxiety, and relationship issues.
         </p>
       </div>
     </section>

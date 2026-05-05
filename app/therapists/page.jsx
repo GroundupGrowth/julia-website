@@ -7,7 +7,7 @@ import { THERAPISTS, WHATSAPP_URL } from "@/lib/data";
 export const metadata = {
   title: "Your therapist — Julia Khaw — BasePsych",
   description:
-    "Meet Julia Khaw, Clinical Psychologist at BasePsych. Attachment-informed, trauma-aware therapy in Singapore.",
+    "Meet Julia Khaw, Registered Clinical Psychologist at BasePsych. Attachment-informed, trauma-aware therapy in Singapore.",
 };
 
 export default function TherapistsPage() {
