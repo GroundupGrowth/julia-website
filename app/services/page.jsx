@@ -29,7 +29,7 @@ export default function ServicesPage() {
             {SERVICES.map((s, i) => {
               const I = Ico[s.icon];
               return (
-                <Reveal key={s.id} className="card service-card" delay={i * 0.04}>
+                <Reveal key={s.id} as={Link} href={`/services/${s.id}`} className="card service-card" delay={i * 0.04} style={{ display: "block", color: "inherit" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", marginBottom: 28 }}>
                     <div className="deco-circle" style={{ width: 64, height: 64 }}><I size={26} stroke={1.4}/></div>
                     <div className="serif" style={{ fontSize: 22, fontStyle: "italic", color: "var(--clay-deep)" }}>0{i + 1}</div>
@@ -39,9 +39,9 @@ export default function ServicesPage() {
                   <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 24 }}>
                     {s.topics.map((t) => <span key={t} className="tag">{t}</span>)}
                   </div>
-                  <Link className="link-arrow" href="/contact">
-                    Enquire about {s.title.toLowerCase()} <Ico.Arrow size={14}/>
-                  </Link>
+                  <span className="link-arrow">
+                    Learn more <Ico.Arrow size={14}/>
+                  </span>
                 </Reveal>
               );
             })}

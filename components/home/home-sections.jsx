@@ -137,7 +137,7 @@ export function HomeServices() {
               <Reveal
                 as={Link}
                 key={s.id}
-                href="/services"
+                href={`/services/${s.id}`}
                 className="card"
                 style={{ textAlign: "left", cursor: "pointer", display: "block" }}
                 delay={i * 0.04}
