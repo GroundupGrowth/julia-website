@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "app/admin/**/*.ts",
+    "app/admin/**/*.tsx",
+    "app/api/admin/**/*.ts",
+    "app/api/admin/**/*.tsx",
+    "components/admin/**/*.ts",
+    "components/admin/**/*.tsx",
+    "lib/cms/**/*.ts",
+    "middleware.ts",
+    "tailwind.config.ts",
+    "drizzle.config.ts"
+  ],
+  "exclude": ["node_modules"]
+}
