@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { Sidebar } from "@/components/admin/sidebar";
 import { Topbar } from "@/components/admin/topbar";
-import { stackServerApp, isAuthorisedAdmin } from "@/lib/cms/stack";
+import { getStackServerApp, isAuthorisedAdmin } from "@/lib/cms/stack";
 
 // Authenticated admin chrome. Wraps every admin page that lives in the
 // (app) route group. /handler/* (Stack's hosted auth UI) lives outside
@@ -14,7 +14,7 @@ export default async function AdminAppLayout({
 }) {
   // No Next.js middleware on /admin/* anymore — Stack auth check happens
   // here in the layout. Server-rendered, so no flash of unauthenticated UI.
-  const user = await stackServerApp.getUser();
+  const user = await getStackServerApp().getUser();
   if (!user) {
     redirect("/handler/sign-in?after_auth_return_to_url=/admin");
   }

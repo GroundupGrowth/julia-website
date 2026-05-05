@@ -1,22 +1,32 @@
 import "server-only";
 import { StackServerApp } from "@stackframe/stack";
 
-// Single Stack server app for the admin. Reads its config from env:
-//   NEXT_PUBLIC_STACK_PROJECT_ID
-//   NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY
-//   STACK_SECRET_SERVER_KEY
-// All three are auto-provisioned by the Neon Auth integration on Vercel.
-export const stackServerApp = new StackServerApp({
-  tokenStore: "nextjs-cookie",
-  // After sign-in / sign-up land back in the admin, not the marketing site.
-  urls: {
-    signIn: "/handler/sign-in",
-    signUp: "/handler/sign-up",
-    afterSignIn: "/admin",
-    afterSignUp: "/admin",
-    afterSignOut: "/handler/sign-in",
-  },
-});
+// Cached lazily so importing this module never constructs the Stack app.
+// Why: StackServerApp validates env vars in its constructor; if those are
+// missing during the Vercel build's "collect page data" phase the whole
+// build fails. Lazy construction defers that to request time, where env
+// vars are guaranteed to be present.
+// The generic argument tracks "has a token store", which Stack's
+// StackProvider type requires. Setting tokenStore: 'nextjs-cookie'
+// satisfies that — encode it explicitly so TS narrows correctly.
+type ConfiguredStackApp = StackServerApp<true>;
+
+let _app: ConfiguredStackApp | null = null;
+
+export function getStackServerApp(): ConfiguredStackApp {
+  if (_app) return _app;
+  _app = new StackServerApp({
+    tokenStore: "nextjs-cookie",
+    urls: {
+      signIn: "/handler/sign-in",
+      signUp: "/handler/sign-up",
+      afterSignIn: "/admin",
+      afterSignUp: "/admin",
+      afterSignOut: "/handler/sign-in",
+    },
+  }) as ConfiguredStackApp;
+  return _app;
+}
 
 // Optional comma-separated allowlist (e.g. "you@example.com,partner@example.com").
 // If unset, any signed-in Neon Auth user is treated as an admin — fine when
@@ -33,6 +43,6 @@ function getAllowedEmails(): string[] | null {
 export function isAuthorisedAdmin(email: string | null | undefined): boolean {
   if (!email) return false;
   const allowed = getAllowedEmails();
-  if (!allowed) return true; // no allowlist configured — any signed-in user
+  if (!allowed) return true;
   return allowed.includes(email.toLowerCase());
 }

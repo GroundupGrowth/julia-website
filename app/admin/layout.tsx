@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { Toaster } from "sonner";
 
-import { stackServerApp } from "@/lib/cms/stack";
+import { getStackServerApp } from "@/lib/cms/stack";
 import "./admin.css";
 
 export const metadata: Metadata = {
@@ -10,16 +10,16 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// Top-level admin layout. Loads admin.css (Tailwind + shadcn variables) and
-// wraps the admin tree in Stack's provider so client components can call
-// useUser() / useStackApp(). Auth gate happens in the (app) sub-layout.
+// Admin is always rendered at request time — never prerendered.
+export const dynamic = "force-dynamic";
+
 export default function AdminRootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <StackProvider app={stackServerApp}>
+    <StackProvider app={getStackServerApp()}>
       <StackTheme>
         <div className="admin-shell min-h-screen">
           {children}
